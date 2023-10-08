@@ -17,8 +17,8 @@
 In one command:
 
 ```bash
-git clone git@github.com:SPUN-UNAL/SPUN-frontend.git
-cd SPUN-frontend
+git clone git@github.com:SPUN-UNAL/SPUN-frontend-ds.git
+cd SPUN-frontend-ds
 npm install
 npm run build
 npm run dev

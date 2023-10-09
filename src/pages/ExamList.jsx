@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import Navbar from "../components/Navbar/Index";
 import { useOutletContext } from "react-router-dom";
 import ExamCard from "../components/Widget/ExamCard";
@@ -6,11 +5,6 @@ import data from "../data/exam-list.json";
 
 function Exam() {
   const [sidebarToggle] = useOutletContext();
-
-  const [loading] = useState(false);
-
-
-  const handleDelete = () => {};
 
   // Card color available at /src/index.css
   return (

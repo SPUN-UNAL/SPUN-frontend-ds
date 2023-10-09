@@ -5,10 +5,12 @@ import SubMenu from "./SubMenu";
 
 function MenuList({ menus, ...props }) {
   return (
-    <div className="navWrapper p-4">
-      <ul id="menu" className="">
+    <div className="navWrapper px-4 py-0">
+      <ul id="menu" className={"" + (props.auth ? "absolute bottom-0 " : "")}>
         {menus?.map((menu) =>
           menu.submenu ? (
+
+
             <SubMenu key={menu.label} menu={menu} props={props} />
           ) : menu.path ? (
             <li key={menu.label} className={``} onClick={props.toggle}>

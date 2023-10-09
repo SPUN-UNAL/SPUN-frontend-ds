@@ -1,7 +1,7 @@
 import { faGraduationCap, faSignOut } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useRef, useState } from "react";
-import initMenus from "../../data/menus.js";
+import {initMenu, authMenu } from "../../data/menus.js";
 import "./sidebar.css";
 import SidebarLogo from "./SidebarLogo.jsx";
 import SidebarSearch from "./SidebarSearch.jsx";
@@ -10,7 +10,8 @@ import { useNavigate } from "react-router-dom";
 
 function Sidebar({ ...props }) {
   const navigate = useNavigate();
-  const [menus, setMenus] = useState(initMenus);
+  const [menus, setMenus] = useState(initMenu);
+  const [authMenus, setAuthMenus] = useState(authMenu);
   const [scButton, setScButton] = useState(false);
   const search = useRef("");
 
@@ -22,15 +23,21 @@ function Sidebar({ ...props }) {
           return el.label.toLowerCase().includes(e.target.value.toLowerCase());
         })
       );
+      setAuthMenus(
+        authMenus.filter((el) => {
+          return el.label.toLowerCase().includes(e.target.value.toLowerCase());
+        })
+      );
     } else {
       setScButton(false);
-      setMenus(initMenus);
+      setMenus(initMenu);
+      setAuthMenus(authMenu);
     }
   };
 
   const clearSearch = () => {
     search.current.value = "";
-    setMenus(initMenus);
+    setMenus(initMenu);
     setScButton(false);
   };
 
@@ -58,7 +65,10 @@ function Sidebar({ ...props }) {
           />
 
           {/* Menu */}
-          <MenuList menus={menus} toggle={props.toggle} />
+          <div className="h-full relative">
+            <MenuList menus={menus} toggle={props.toggle} />
+            <MenuList menus={authMenus} toggle={props.toggle} auth={true} />
+          </div>
 
           {/* Profile */}
           <div className="pt-2 border-t border-gray-300">
@@ -75,6 +85,7 @@ function Sidebar({ ...props }) {
         </div>
       </aside>
 
+
       {props.className === "mobile" && (
         <div
           id="overlaySidebar"
@@ -84,6 +95,7 @@ function Sidebar({ ...props }) {
           <div></div>
         </div>
       )}
+
     </>
   );
 }

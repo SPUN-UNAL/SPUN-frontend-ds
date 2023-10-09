@@ -1,0 +1,34 @@
+{
+ "data" : [
+    {
+      "title": "Examen Matemáticas",
+      "id": 1,
+      "max": 300,
+      "color": "cardMath"
+    },
+    {
+      "title": "Examen Análisis textual",
+      "id": 2,
+      "max": 200,
+      "color": "cardTextAnalysis"
+    },
+    {
+      "title": "Examen Análisis de Imágen",
+      "id": 3,
+      "max": 300,
+      "color": "cardImageAnalysis"
+    },
+    {
+      "title": "Examen Ciencias Naturales",
+      "id": 4,
+      "max": 300,
+      "color": "cardNaturalScience"
+    },
+    {
+      "title": "Examen Ciencias Sociales",
+      "id": 5,
+      "max": 300,
+      "color": "cardSocialScience"
+    }
+  ]
+}

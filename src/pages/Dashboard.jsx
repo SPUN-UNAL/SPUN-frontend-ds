@@ -58,7 +58,6 @@ function Dashboard() {
           user={{ name: "Dani Diaz" }}
         />
 
-        {/* Laba */}
         <div className="px-2 mx-auto mainCard">
           <div className="w-full overflow-hidden text-slate-700 md:grid gap-4 grid md:grid-cols-6">
             <StatisticWidget className="col-span-4 col-start-1 bg-white" />
@@ -66,7 +65,6 @@ function Dashboard() {
           </div>
         </div>
 
-        {/* OS Kredit */}
         <div className="px-2 mx-auto mainCard">
           <h1 className="text-slate-500 pb-3 text-base md:text-lg">
             Simulacros tomados

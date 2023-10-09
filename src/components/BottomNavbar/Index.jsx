@@ -1,7 +1,7 @@
 import {
-  faBell,
+  faList,
   faHome,
-  faMessage,
+  faBookOpen,
   faSignOut,
   faUserAlt,
 } from "@fortawesome/free-solid-svg-icons";
@@ -15,31 +15,31 @@ function Index() {
   const menus = useMemo(
     () => [
       {
-        label: "Home",
+        label: "Dashboard",
         icon: faHome,
         link: "/",
         dis: "translate-x-0",
       },
       {
-        label: "Notifikasi",
-        icon: faBell,
-        link: "/table",
+        label: "Simulacros",
+        link: "/list-simulacrums",
+        icon: faList,
         dis: "translate-x-16",
       },
       {
-        label: "Pesan",
-        icon: faMessage,
-        link: "/form",
+        label: "Examenes",
+        icon: faBookOpen,
+        link: "/exams",
         dis: "translate-x-32",
       },
       {
-        label: "Profile",
+        label: "Perfil",
         icon: faUserAlt,
         link: "/profile",
         dis: "translate-x-48",
       },
       {
-        label: "Keluar",
+        label: "Autenticación",
         icon: faSignOut,
         link: "/auth/login",
         dis: "translate-x-64",

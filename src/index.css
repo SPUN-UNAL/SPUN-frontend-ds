@@ -23,6 +23,9 @@
 .scrolledCard{
     @apply cursor-pointer rounded-md text-sm flex-shrink-0 md:flex-shrink px-2 py-4 w-[160px] lg:w-1/5;
 }
+.examCard{
+    @apply cursor-pointer rounded-md text-sm flex-shrink-0 md:flex-shrink px-2 py-4;
+}
 
 .cardMath{
     @apply bg-sky-200 text-sky-900 border border-sky-400

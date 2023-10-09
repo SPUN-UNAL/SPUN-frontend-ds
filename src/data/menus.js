@@ -1,7 +1,5 @@
-import { faWindows } from "@fortawesome/free-brands-svg-icons";
 import {
   faBookOpen,
-  faTable,
   faLock,
   faUserPlus,
   faUniversity,
@@ -19,31 +17,20 @@ const initMenu = [
   },
   {
     label: "Lista de Simulacros",
-    path: "/table",
+    path: "/list-simulacrums",
     icon: faList,
   },
   {
     label: "Examen por materia",
-    path: "/form",
+    path: "/exams",
     icon: faBookOpen,
   },
   
-  {
-    label: 'Recursos'
-  },
-  {
-    label: "Form",
-    path: "/form",
-    icon: faWindows,
-  },
-  {
-    label: "Table",
-    path: "/table",
-    icon: faTable,
-  },
+];
 
+const authMenu = [
   {
-    label: 'Autenticación'
+    label: 'Autenticación',
   },
   {
     label: "Acceder",
@@ -57,4 +44,4 @@ const initMenu = [
   },
 ];
 
-export default initMenu
+export {initMenu, authMenu};

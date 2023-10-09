@@ -7,109 +7,52 @@
         "date": "21/03/2021",
         "components": [
             "math",
-            "natural sciences",
             "social sciences"
+        ]
+    },
+    {
+        "id": 2,
+        "name": "Examen de Ciencias Naturales",
+        "time": "150 min",
+        "date": "15/06/2021",
+        "components": [
+            "natural sciences"
         ]
     },
 
     {
-        "id": 1,
-        "name": "Primer simulacro 2021",
-        "time": "120 min",
-        "date": "21/03/2021",
+        "id": 7,
+        "name": "Prueba Completa",
+        "time": "240 min",
+        "date": "30/11/2021",
         "components": [
             "math",
             "natural sciences",
-            "social sciences"
+            "social sciences",
+            "text analysis",
+            "image analysis"
         ]
     },
     {
-        "id": 1,
-        "name": "Primer simulacro 2021",
-        "time": "120 min",
-        "date": "21/03/2021",
+        "id": 8,
+        "name": "Examen Integral de Ciencias",
+        "time": "180 min",
+        "date": "05/12/2021",
         "components": [
             "math",
             "natural sciences",
-            "social sciences"
+            "social sciences",
+            "text analysis"
         ]
     },
     {
-        "id": 1,
-        "name": "Primer simulacro 2021",
+        "id": 9,
+        "name": "Prueba de Química y Física",
         "time": "120 min",
-        "date": "21/03/2021",
+        "date": "15/01/2022",
         "components": [
-            "math",
             "natural sciences",
-            "social sciences"
-        ]
-    },
-    {
-        "id": 1,
-        "name": "Primer simulacro 2021",
-        "time": "120 min",
-        "date": "21/03/2021",
-        "components": [
-            "math",
-            "natural sciences",
-            "social sciences"
-        ]
-    },
-
-    {
-        "id": 1,
-        "name": "Primer simulacro 2021",
-        "time": "120 min",
-        "date": "21/03/2021",
-        "components": [
-            "math",
-            "natural sciences",
-            "social sciences"
-        ]
-    },
-    {
-        "id": 1,
-        "name": "Primer simulacro 2021",
-        "time": "120 min",
-        "date": "21/03/2021",
-        "components": [
-            "math",
-            "natural sciences",
-            "social sciences"
-        ]
-    },
-    {
-        "id": 1,
-        "name": "Primer simulacro 2021",
-        "time": "120 min",
-        "date": "21/03/2021",
-        "components": [
-            "math",
-            "natural sciences",
-            "social sciences"
-        ]
-    },
-    {
-        "id": 1,
-        "name": "Primer simulacro 2021",
-        "time": "120 min",
-        "date": "21/03/2021",
-        "components": [
-            "math",
-            "natural sciences",
-            "social sciences"
-        ]
-    },
-    {
-        "id": 1,
-        "name": "Primer simulacro 2021",
-        "time": "120 min",
-        "date": "21/03/2021",
-        "components": [
-            "math",
-            "natural sciences",
-            "social sciences"
+            "text analysis"
         ]
     }
     ]

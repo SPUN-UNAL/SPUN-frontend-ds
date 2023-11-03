@@ -12,6 +12,7 @@ import Blank from "./pages/Blank";
 import NotFound from "./pages/NotFound";
 import Form from "./pages/Form";
 import RegisterIndex from "./pages/auth/Register";
+import ExamTake from "pages/exam/ExamTake";
 
 function App() {
   return (
@@ -21,7 +22,8 @@ function App() {
         <Route path="/blank" element={<Blank />}></Route>
 
 
-        <Route path="/list-simulacrums" element={<SimulacrumList />}></Route>
+        <Route path="/list-simulacrums" element={< SimulacrumList />}></Route>
+        <Route path="/take-exam" element={< ExamTake />}></Route>
         <Route path="/exams" element={<ExamList />}></Route>
 
         <Route path="/table" element={<Table />}></Route>
@@ -35,6 +37,10 @@ function App() {
       <Route path="/auth" element={<GuestLayout />}>
         <Route path="/auth/login" element={<Login />}></Route>
         <Route path="/auth/register" element={<RegisterIndex />}></Route>
+      </Route>
+
+      <Route path="/exam" element={< GuestLayout />}>
+        <Route path="/exam/take" element={< ExamTake />}></Route>
       </Route>
     </Routes>
   );

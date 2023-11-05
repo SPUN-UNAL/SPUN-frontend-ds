@@ -15,6 +15,7 @@ import NotFound from "./pages/NotFound";
 import Form from "./pages/Form";
 import GuestLayout from "./components/Layout/GuestLayout";
 import ProtectedRoute from "./components/ProtectedRoute";
+import ExamTake from "pages/exam/ExamTake";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<HomePage />}></Route>
+          <Route path="/404" element={<NotFound />}></Route>
 
           <Route path="/auth" element={<GuestLayout />}>
             <Route path="/auth/login" element={<LoginPage />}></Route>
@@ -29,10 +31,12 @@ function App() {
           </Route>
 
           <Route path="/" element={<ProtectedRoute />}>
+            <Route path="/exam" element={< GuestLayout />}>
+              <Route path="/exam/take/:id" element={< ExamTake />}></Route>
+            </Route>
             <Route path="/dashboard" element={<AuthLayout />}>
               <Route path="/dashboard" element={<Dashboard />}></Route>
               <Route path="/dashboard/blank" element={<Blank />}></Route>
-
               <Route
                 path="/dashboard/list-simulacrums"
                 element={<SimulacrumList />}
@@ -46,7 +50,6 @@ function App() {
             </Route>
           </Route>
 
-          <Route path="/404" element={<NotFound />}></Route>
         </Routes>
       </BrowserRouter>
     </AuthProvider>

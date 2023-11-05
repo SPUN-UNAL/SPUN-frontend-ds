@@ -4,8 +4,12 @@ import AchievementWidget from "../components/Widget/Achievement.jsx";
 import DashboardHeader from "../components/Other/DashboardHeader.jsx";
 import ScrolledCard from "../components/Widget/ScrolledCard.jsx";
 import { useOutletContext } from "react-router-dom";
+import { useAuth } from "../context/AuthContext.jsx";
+
 function Dashboard() {
-  const avatar ="/images/male_avatar.svg";
+  const { user } = useAuth();
+
+  const avatar = "/images/male_avatar.svg";
 
   // Card color available at /src/index.css
   const dataOS = [
@@ -55,7 +59,7 @@ function Dashboard() {
         <DashboardHeader
           toggle={sidebarToggle}
           avatar={avatar}
-          user={{ name: "Dani Diaz" }}
+          user={{ name: user.username }}
         />
 
         <div className="px-2 mx-auto mainCard">

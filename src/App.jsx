@@ -1,42 +1,55 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, BrowserRouter } from "react-router-dom";
+import { AuthProvider } from "./context/AuthContext";
 
+import HomePage from "./pages/HomePage";
+import LoginPage from "./pages/auth/LoginPage";
+import RegisterPage from "./pages/auth/RegisterPage";
 import Dashboard from "./pages/Dashboard";
+import Blank from "pages/Blank";
+import AuthLayout from "./components/Layout/AuthLayout";
 import Table from "./pages/Table";
 import ExamList from "./pages/ExamList";
 import SimulacrumList from "./pages/SimulacrumList";
-import AuthLayout from "./components/Layout/AuthLayout";
-import GuestLayout from "./components/Layout/GuestLayout";
-import Login from "./pages/auth/Login";
-import Blank from "./pages/Blank";
 import NotFound from "./pages/NotFound";
 import Form from "./pages/Form";
-import RegisterIndex from "./pages/auth/Register";
+import GuestLayout from "./components/Layout/GuestLayout";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<AuthLayout />}>
-        <Route path="/" element={<Dashboard />}></Route>
-        <Route path="/blank" element={<Blank />}></Route>
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<HomePage />}></Route>
 
+          <Route path="/auth" element={<GuestLayout />}>
+            <Route path="/auth/login" element={<LoginPage />}></Route>
+            <Route path="/auth/register" element={<RegisterPage />}></Route>
+          </Route>
 
-        <Route path="/list-simulacrums" element={<SimulacrumList />}></Route>
-        <Route path="/exams" element={<ExamList />}></Route>
+          <Route path="/" element={<ProtectedRoute />}>
+            <Route path="/dashboard" element={<AuthLayout />}>
+              <Route path="/dashboard" element={<Dashboard />}></Route>
+              <Route path="/dashboard/blank" element={<Blank />}></Route>
 
-        <Route path="/table" element={<Table />}></Route>
-        <Route path="/form" element={<Form />}></Route>
+              <Route
+                path="/dashboard/list-simulacrums"
+                element={<SimulacrumList />}
+              ></Route>
+              <Route path="/dashboard/exams" element={<ExamList />}></Route>
 
-        <Route path="/profile" element={<Blank />}></Route>
+              <Route path="/dashboard/table" element={<Table />}></Route>
+              <Route path="/dashboard/form" element={<Form />}></Route>
 
-        <Route path="/404" element={<NotFound />}></Route>
-      </Route>
+              <Route path="/dashboard/profile" element={<Blank />}></Route>
+            </Route>
+          </Route>
 
-      <Route path="/auth" element={<GuestLayout />}>
-        <Route path="/auth/login" element={<Login />}></Route>
-        <Route path="/auth/register" element={<RegisterIndex />}></Route>
-      </Route>
-    </Routes>
+          <Route path="/404" element={<NotFound />}></Route>
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
 

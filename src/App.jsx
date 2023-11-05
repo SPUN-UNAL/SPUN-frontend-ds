@@ -21,7 +21,6 @@ function App() {
         <Route path="/" element={<Dashboard />}></Route>
         <Route path="/blank" element={<Blank />}></Route>
 
-
         <Route path="/list-simulacrums" element={< SimulacrumList />}></Route>
         <Route path="/take-exam" element={< ExamTake />}></Route>
         <Route path="/exams" element={<ExamList />}></Route>
@@ -40,7 +39,7 @@ function App() {
       </Route>
 
       <Route path="/exam" element={< GuestLayout />}>
-        <Route path="/exam/take" element={< ExamTake />}></Route>
+        <Route path="/exam/take/:id" element={< ExamTake />}></Route>
       </Route>
     </Routes>
   );

@@ -16,7 +16,7 @@ function AuthLayout({ ...props }) {
   }, []);
 
   return (
-    <div className="adminLayout">
+    <div className="adminLayout" id="root">
       {/* Sidebar */}
       <Sidebar
         toggle={sidebarToggle}

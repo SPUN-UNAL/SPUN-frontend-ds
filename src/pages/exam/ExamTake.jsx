@@ -1,9 +1,10 @@
-import {useState, useEffect} from 'react';
+import {useEffect, useState} from 'react';
+
 import Exam from "components/Exam/Exam";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 
-const baseURL = "http://localhost:4000/api/";
+const baseURL = "http://localhost:3000/api/";
 
 function ExamTake() {
   // Fetch exam

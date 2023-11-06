@@ -17,8 +17,17 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [errors, setErrors] = useState(null);
+  const [errors, setErrors] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (errors.length > 0) {
+      const timer = setTimeout(() => {
+        setErrors([]);
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [errors]);
 
   useEffect(() => {
     const checkLogin = async () => {
@@ -54,7 +63,6 @@ export const AuthProvider = ({ children }) => {
       setUser(res.data);
       console.log(res);
     } catch (error) {
-      console.log(error.response);
       setErrors(error.response.data);
     }
   };
@@ -66,7 +74,6 @@ export const AuthProvider = ({ children }) => {
       setUser(res.data);
       console.log(res);
     } catch (error) {
-      console.log(error.response);
       setErrors(error.response.data);
     }
   };

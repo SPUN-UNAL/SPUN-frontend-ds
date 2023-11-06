@@ -167,61 +167,53 @@ const Exam = (props) => {
         indexMap={indexMap}
       ></Panel>
 
-      <p>
-        <span>Question:{text}</span>
-      </p>
-
-      <ul>
-        {choices.map((text, index) => (
-          <li
-            onClick={() => onClickChoice(index)}
-            key={index}
-            className={index === choiceIndex ? "bg-slate-400" : ""}
-          >
-            {toLetter(index) + ") "}
-            {text}
-          </li>
-        ))}
-      </ul>
-
-      <p>
-        <span>
-          Choose answer: {choiceIndex + 1}: Is Correct: {choiceStatus}
-        </span>
-      </p>
-      <div className="">
-        <button
-          onClick={() => onClickPrev(currentQuestionBlock, currentQuestion)}
+      <div className="grid place-self-center">
+        <div
+          href="#"
+          className="p-2 md:p-8 bg-white border border-gray-200 rounded-lg shadow "
         >
-          Prev
-        </button>
-        {!isFinished() ? (
-          <button onClick={onClickNext(currentQuestionBlock, currentQuestion)}>
-            Next
-          </button>
-        ) : (
-          <SendModal
-            questionNumber={questionNumber}
-            answeredQuestions={answeredQuestions}
-            questionBlocks={questionBlocks}
-            choicesVector={choicesVector}
-            indexMap={indexMap}
-            startdate={startdate}
-            navigate={navigate}
-          ></SendModal>
-        )}
-        <p>
-          {choicesVector.map((element, index) => (
-            <span key={index}> {element}</span>
-          ))}
-          <span>
-            <br></br>SCORE: {score}
-          </span>
-        </p>
-        <p>
-          CURRENT BLOCK: {currentQuestionBlock}
-          CURRENT Question: {currentQuestion}
-        </p>
+          <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 ">
+            {questionNumber + "."}
+            <span className="md:ml-4 sm:ml-2 text-xl font-medium"> {text}</span>
+          </h5>
+          <ul className="font-normal text-gray-800 text-lg">
+            {choices.map((text, index) => (
+              <li
+                onClick={() => onClickChoice(index)}
+                key={index}
+                className={`${index === choiceIndex ? "bg-slate-400" : ""} my-3`}
+              >
+                <span className="font-semibold">{toLetter(index) + ") "}</span>
+                <span>{text}</span>
+              </li>
+            ))}
+          </ul>
+          <div className="w-full">
+            <button
+              onClick={() => onClickPrev(currentQuestionBlock, currentQuestion)}
+              className="" 
+            >
+              Prev
+            </button>
+            {!isFinished() ? (
+              <button
+                onClick={onClickNext(currentQuestionBlock, currentQuestion)}
+              >
+                Next
+              </button>
+            ) : (
+              <SendModal
+                questionNumber={questionNumber}
+                answeredQuestions={answeredQuestions}
+                questionBlocks={questionBlocks}
+                choicesVector={choicesVector}
+                indexMap={indexMap}
+                startdate={startdate}
+                navigate={navigate}
+              ></SendModal>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );

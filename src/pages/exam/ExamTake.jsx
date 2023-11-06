@@ -1,46 +1,53 @@
 import {useEffect, useState} from 'react';
-
 import Exam from "components/Exam/Exam";
-import axios from "axios";
 import { useParams } from "react-router-dom";
+import { getExam } from "api/exams";
+import ExamInfo from "components/Exam/ExamInfo";
 
-const baseURL = "http://localhost:3000/api/";
 
 function ExamTake() {
   // Fetch exam
-  let {id} = useParams();
+  let { id } = useParams();
+
   const [data, setData] = useState(null);
-  const examURL = baseURL  +  "exam/" +  id;
+  const [questionNumber, setQuestionNumber] = useState(0);
+  const [currentQuestionNumber, setCurrentQuestionNumber] = useState(1);
 
   useEffect(() => {
-    axios.get(examURL).then((response)=>{
-      setData(response.data.exam);
-    })
+    const setExam = async () => {
+      const dump = await getExam(id);
+      setData(dump.data.exam);
+    };
+    setExam();
   });
 
-  if (!data){
+  if (!data) {
     return (
       <>
         <div>
           <p>Error 404: No encontrado</p>
         </div>
       </>
-    )
+    );
   }
   return (
     <>
-      <main className="h-full">
+      <main className="h-screen w-full bg-slate-100 ">
+        <ExamInfo
+          data={data}
+          questionNumber={questionNumber}
+          currentQuestionNumber={currentQuestionNumber}
+        ></ExamInfo>
+
         {/* Main Content */}
-        <div className="">
-          <p>Estas tomando el examen: {data.title} </p>
-          <p>{data.description}</p>
-        </div>
-        <div className="mainCard">
-          <div className="container">
-            {/* Fetch of questions */}
-            <Exam questionBlocks={data.questionBlocks}></Exam>
-          </div>
-        </div>
+          {/* Fetch of questions */}
+        <Exam
+          questionBlocks={data.questionBlocks}
+          questionNumber={questionNumber}
+          setQuestionNumber={setQuestionNumber}
+          currentQuestionNumber={currentQuestionNumber}
+          setCurrentQuestionNumber={setCurrentQuestionNumber}
+        ></Exam>
       </main>
     </>
   );

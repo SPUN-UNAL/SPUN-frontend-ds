@@ -1,21 +1,20 @@
 import { Link } from "react-router-dom";
-
+import HeroSection from "components/LandingPage/HeroSection";
+import FeaturesSection from "components/LandingPage/FeaturesSection";
+import CTA from "components/LandingPage/CTA"
+import { useEffect } from "react";
 function HomePage() {
+  // Changes background color
+  useEffect(() => {
+    document.body.classList.add("bg-slate-100");
+  });
+
   return (
     <>
-      <div>
-        <Link
-          to="/auth/login"
-          className="inline-flex items-center font-bold text-emerald-500 hover:text-emerald-700 text-xs text-center"
-        >
-          Login
-        </Link>
-        <Link
-          to="/auth/register"
-          className="inline-flex items-center font-bold text-emerald-500 hover:text-emerald-700 text-xs text-center"
-        >
-          Register
-        </Link>
+      <div className="">
+        <HeroSection></HeroSection>
+        <FeaturesSection></FeaturesSection>
+        <CTA></CTA>
       </div>
     </>
   );

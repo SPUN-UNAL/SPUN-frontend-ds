@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import {useEffect, useState} from 'react';
 import Exam from "components/Exam/Exam";
 import { useParams } from "react-router-dom";
 import { getExam } from "api/exams";
 import ExamInfo from "components/Exam/ExamInfo";
+
 
 function ExamTake() {
   // Fetch exam

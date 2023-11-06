@@ -9,8 +9,12 @@ import { useForm } from "react-hook-form";
 
 function RegisterPage() {
   const navigate = useNavigate();
-  const { register, handleSubmit, error } = useForm();
-  const { signup, isAuthenticated } = useAuth();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const { signup, isAuthenticated, errors: registerErrors } = useAuth();
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -62,6 +66,9 @@ function RegisterPage() {
 
               {/* Register Form */}
               <div className="md:mt-10 mt-4">
+                {registerErrors.map((error, i) => (
+                  <div className="font-semibold text-red-500 my-2" key={i}>{error}</div>
+                ))}
                 <form onSubmit={onSubmit}>
                   {/* Email */}
                   <div className="flex flex-col mb-3">
@@ -77,9 +84,9 @@ function RegisterPage() {
                         placeholder="Correo electrónico"
                       />
                     </div>
-                    {error?.email && (
+                    {errors.email && (
                       <span className="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">
-                        {error.email[0]}
+                        El correo electrónico es requerido
                       </span>
                     )}
                   </div>
@@ -98,9 +105,9 @@ function RegisterPage() {
                         placeholder="Nombre de usuario"
                       />
                     </div>
-                    {error?.name && (
+                    {errors.username && (
                       <span className="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">
-                        {error.email[0]}
+                        El nombre de usuario es requerido
                       </span>
                     )}
                   </div>
@@ -119,9 +126,9 @@ function RegisterPage() {
                         placeholder="Contraseña"
                       />
                     </div>
-                    {error?.password && (
+                    {errors.password && (
                       <span className="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">
-                        {error.password[0]}
+                        La contraseña es requerida
                       </span>
                     )}
                   </div>

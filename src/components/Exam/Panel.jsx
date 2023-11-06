@@ -25,8 +25,8 @@ const Panel = ({
     <>
       {/* Panel */}
       <div className={`${otherClassNames} sm:pb-4`}>
-        <h2 className="text-xl my-2 text-slate-800 font-bold">Panel</h2>
-        <div className="sm:my-4 my-2">
+        <h2 className="text-md my-1 text-slate-800 font-bold">Panel</h2>
+        <div className="sm:my-3 my-2">
           {panel.map((element, index) => (
             <span
               key={index}

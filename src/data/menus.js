@@ -11,7 +11,7 @@ const initMenu = [
     icon: faUniversity,
   },
   {
-    label: 'Simulacros'
+    label: "Simulacros",
   },
   {
     label: "Lista de Simulacros",
@@ -23,10 +23,8 @@ const initMenu = [
     path: "/dashboard/exams",
     icon: faBookOpen,
   },
-  
 ];
 
-const authMenu = [
-];
+const authMenu = [];
 
-export {initMenu, authMenu};
+export { initMenu, authMenu };

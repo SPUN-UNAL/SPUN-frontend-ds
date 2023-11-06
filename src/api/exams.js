@@ -4,6 +4,10 @@ export const getExam = async  (id) => {
     return axios.get(`/exam/${id}`);
 };
 
+export const getExams = async ()=>{
+  return axios.get(`/exam/`);
+}
+
 export const postExamTake = async (
   exam_id,
   answers,

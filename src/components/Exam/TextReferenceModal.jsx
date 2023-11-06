@@ -35,10 +35,10 @@ const TextReferenceModal = ({ questionBlocks, currentQuestionBlock }) => {
             isOpen={isOpenModal}
             onRequestClose={onClickCloseModal}
             contentLabel="Finish Exam Modal"
-            className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0 bg-zinc-300 bg-opacity-30 backdrop-blur-[1.3px]"
+            className="flex min-h-full justify-center p-4 text-center items-center sm:p-0 bg-zinc-300 bg-opacity-30 backdrop-blur-[1.3px]"
           >
             <div className="relative transform overflow-hidden bg-transparent rounded-lg text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-xl sm:h-full max-h-2xl">
-              <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+              <div className="bg-white sm:p-6">
                 <div className="sm:flex sm:items-start">
                   <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
                     <h3

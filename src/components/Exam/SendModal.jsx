@@ -1,8 +1,9 @@
 import Modal from "react-modal";
 import { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { postExamTake } from "api/exams";
 import { useAuth } from "context/AuthContext";
+import FormButton from "./FormButton";
 
 const SendModal = ({
   questionNumber,
@@ -36,13 +37,16 @@ const SendModal = ({
 
     for (let i = 0; i < questionNumber; i++) {
       // question
-      dump[i] = String(choicesVector[i] + 1)
-      if (questionBlocks[indexMap[i][0]].questions[indexMap[i][1]].answer === dump[i]){
+      dump[i] = String(choicesVector[i] + 1);
+      if (
+        questionBlocks[indexMap[i][0]].questions[indexMap[i][1]].answer ===
+        dump[i]
+      ) {
         score++;
       }
     }
 
-    score = score / (questionNumber) ;
+    score = score / questionNumber;
 
     postExamTake(id, dump, startdate, enddate, user.email, score);
 
@@ -53,7 +57,12 @@ const SendModal = ({
 
   return (
     <>
-      <button onClick={onClickOpenModal}>Enviar</button>
+      <FormButton
+        onClick={onClickOpenModal}
+        extraClassNames="sm:ml-12"
+      >
+        Enviar
+      </FormButton>
       <Modal
         isOpen={isOpenModal}
         onRequestClose={onClickCloseModal}

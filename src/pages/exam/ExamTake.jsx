@@ -31,7 +31,7 @@ function ExamTake() {
   }
   return (
     <>
-      <main className="h-full">
+      <main className="h-screen w-full bg-slate-100 ">
         <ExamInfo
           data={data}
           questionNumber={questionNumber}
@@ -39,18 +39,14 @@ function ExamTake() {
         ></ExamInfo>
 
         {/* Main Content */}
-        <div className="mainCard">
-          <div className="container">
-            {/* Fetch of questions */}
-            <Exam
-              questionBlocks={data.questionBlocks}
-              questionNumber={questionNumber}
-              setQuestionNumber={setQuestionNumber}
-              currentQuestionNumber={currentQuestionNumber}
-              setCurrentQuestionNumber={setCurrentQuestionNumber}
-            ></Exam>
-          </div>
-        </div>
+          {/* Fetch of questions */}
+        <Exam
+          questionBlocks={data.questionBlocks}
+          questionNumber={questionNumber}
+          setQuestionNumber={setQuestionNumber}
+          currentQuestionNumber={currentQuestionNumber}
+          setCurrentQuestionNumber={setCurrentQuestionNumber}
+        ></Exam>
       </main>
     </>
   );

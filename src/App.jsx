@@ -17,7 +17,6 @@ import GuestLayout from "./components/Layout/GuestLayout";
 import ProtectedRoute from "./components/ProtectedRoute";
 import ExamTake from "pages/exam/ExamTake";
 
-
 function App() {
   return (
     <AuthProvider>
@@ -32,8 +31,8 @@ function App() {
           </Route>
 
           <Route path="/" element={<ProtectedRoute />}>
-            <Route path="/exam" element={< GuestLayout />}>
-              <Route path="/exam/take/:id" element={< ExamTake />}></Route>
+            <Route path="/exam" element={<GuestLayout />}>
+              <Route path="/exam/take/:id" element={<ExamTake />}></Route>
             </Route>
             <Route path="/dashboard" element={<AuthLayout />}>
               <Route path="/dashboard" element={<Dashboard />}></Route>
@@ -50,7 +49,6 @@ function App() {
               <Route path="/dashboard/profile" element={<Blank />}></Route>
             </Route>
           </Route>
-
         </Routes>
       </BrowserRouter>
     </AuthProvider>

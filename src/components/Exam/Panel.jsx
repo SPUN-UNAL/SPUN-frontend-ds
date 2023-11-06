@@ -26,7 +26,7 @@ const Panel = ({
       {/* Panel */}
       <div className={`${otherClassNames} sm:pb-4`}>
         <h2 className="text-md my-1 text-slate-800 font-bold">Panel</h2>
-        <div className="sm:my-3 my-2">
+        <div className="my-2">
           {panel.map((element, index) => (
             <span
               key={index}
@@ -35,8 +35,9 @@ const Panel = ({
                ${element === currentQuestionNumber? "" : "hover:bg-gray-200"}
                 cursor-pointer 
                 rounded-md
-                sm:p-3 p-2
-                text-lg
+                p-2
+                text-sm
+                mx-1
             `}
             >
               {" " + element}

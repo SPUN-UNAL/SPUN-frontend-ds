@@ -1,5 +1,5 @@
 // Functional component
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Panel from "./Panel";
 import SendModal from "./SendModal";
@@ -7,11 +7,12 @@ import FormButton from "./FormButton";
 import TextReferenceModal from "./TextReferenceModal";
 
 const Exam = (props) => {
+  // Not modified here
   const questionBlocks = props.questionBlocks;
-
+  const indexMap = props.indexMap;
   const questionNumber = props.questionNumber;
-  const setQuestionNumber = props.setQuestionNumber;
 
+  // Modified here
   const currentQuestionNumber = props.currentQuestionNumber;
   const setCurrentQuestionNumber = props.setCurrentQuestionNumber;
 
@@ -19,19 +20,8 @@ const Exam = (props) => {
   // get date as soon as entered page
   const startdate = Date.now();
   // name, setName
-  let tempQuestionNumber = 0;
-  let indexMap = {};
 
-  for (let i = 0; i < questionBlocks?.length; i++) {
-    for (let j = 0; j < questionBlocks[i].questions?.length; j++) {
-      indexMap[tempQuestionNumber] = [i, j];
-      tempQuestionNumber++;
-    }
-  }
-
-  setQuestionNumber(tempQuestionNumber);
-
-  const initialChoices = Array(tempQuestionNumber).fill(-1);
+  const initialChoices = Array(questionNumber).fill(-1);
 
   const [currentQuestionBlock, setCurrentQuestionBlock] = useState(0);
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -49,10 +39,6 @@ const Exam = (props) => {
   const [answeredQuestions, setAnsweredQuestions] = useState(0);
 
   if (!questionBlocks[currentQuestionBlock]) {
-    console.log(questionBlocks);
-    console.log("Cur question inside block", currentQuestion);
-    console.log("Cur question Block", currentQuestionBlock);
-    console.log("Question Number", questionNumber);
     return (
       <>
         <p>No this</p>
@@ -64,7 +50,7 @@ const Exam = (props) => {
     questionBlocks[currentQuestionBlock].questions[currentQuestion];
 
   const isFinished = () => {
-    return currentQuestionNumber === tempQuestionNumber;
+    return currentQuestionNumber === questionNumber;
   };
   const isStart = () => {
     return currentQuestionNumber === 1;
@@ -99,6 +85,7 @@ const Exam = (props) => {
     let numberOfQuestions = questionBlocks[questionBlockPos].questions?.length;
     if (isFinished()) {
       // Finish the exam
+      return;
     } else {
       // Continue with the exam
       if (questionPos === numberOfQuestions - 1) {
@@ -114,6 +101,7 @@ const Exam = (props) => {
       } else {
         setChoiceIndex(choicesVector[currentQuestion]);
       }
+
       setCurrentQuestionNumber(currentQuestionNumber + 1);
     }
   };
@@ -133,28 +121,16 @@ const Exam = (props) => {
         // Next question in current questionBlock
         setCurrentQuestion(questionPos - 1);
       }
+
       if (choicesVector[currentQuestionNumber - 2] === -1) {
         setChoiceIndex(null);
       } else {
         setChoiceIndex(choicesVector[currentQuestionNumber - 2]);
       }
+
       setCurrentQuestionNumber(currentQuestionNumber - 1);
     }
   };
-
-  // console.log("BLOQUES", questionBlocks[currentQuestionBlock]);
-  // console.log(
-  //   "Questions",
-  //   questionBlocks[currentQuestionBlock].questions[currentQuestion]
-  // );
-  // console.log(text, choices, answer);
-  // console.log(
-  //   "QUESTION BLOCK",
-  //   currentQuestionBlock,
-  //   "CURRENT QUESTION BLOCK",
-  //   currentQuestion
-  // );
-  // console.log("index map", indexMap);
 
   return (
     <>
@@ -183,7 +159,7 @@ const Exam = (props) => {
               className="p-2 md:p-8 bg-white border border-gray-200 rounded-lg shadow "
             >
               <h5 className="mb-2 md:mb-6 text-2xl font-bold tracking-tight text-gray-900 ">
-                {questionNumber + "."}
+                {currentQuestionNumber + "."}
                 <span className="md:ml-4 sm:ml-2 text-xl font-medium">
                   {" "}
                   {text}
@@ -220,14 +196,17 @@ const Exam = (props) => {
                   sm:mr-12
             `}
             >
-              Prev
+              Anterior
             </FormButton>
+
             {!isFinished() ? (
               <FormButton
-                onClick={onClickNext(currentQuestionBlock, currentQuestion)}
+                onClick={() =>
+                  onClickNext(currentQuestionBlock, currentQuestion)
+                }
                 extraClassNames="sm:ml-12"
               >
-                Next
+                Siguiente
               </FormButton>
             ) : (
               <SendModal

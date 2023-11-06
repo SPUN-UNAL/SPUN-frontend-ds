@@ -10,7 +10,6 @@ function ExamTake() {
   let { id } = useParams();
 
   const [data, setData] = useState(null);
-  const [questionNumber, setQuestionNumber] = useState(0);
   const [currentQuestionNumber, setCurrentQuestionNumber] = useState(1);
 
   useEffect(() => {
@@ -30,6 +29,19 @@ function ExamTake() {
       </>
     );
   }
+
+  const questionBlocks = data.questionBlocks;
+  let indexMap = {};
+  let questionNumber = 0;
+
+  for (let i = 0; i < questionBlocks?.length; i++) {
+    for (let j = 0; j < questionBlocks[i].questions?.length; j++) {
+      indexMap[questionNumber] = [i, j];
+      questionNumber++;
+    }
+  }
+
+
   return (
     <>
       <main className="h-screen w-full bg-slate-100 ">
@@ -42,11 +54,11 @@ function ExamTake() {
         {/* Main Content */}
           {/* Fetch of questions */}
         <Exam
-          questionBlocks={data.questionBlocks}
+          questionBlocks={questionBlocks}
           questionNumber={questionNumber}
-          setQuestionNumber={setQuestionNumber}
           currentQuestionNumber={currentQuestionNumber}
           setCurrentQuestionNumber={setCurrentQuestionNumber}
+          indexMap={indexMap}
         ></Exam>
       </main>
     </>

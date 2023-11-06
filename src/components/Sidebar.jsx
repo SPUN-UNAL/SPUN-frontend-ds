@@ -89,26 +89,10 @@ function Sidebar() {
           </ul>
         </div>
 
-        {/* Profile */}
-        <div className="text-sm">
-          <div className="flex items-center space-x-2 border-b border-gray-300 py-4 mb-3">
-            <img
-              className="w-16 border border-green-500 p-1 rounded"
-              src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50"
-              alt="Profile"
-            />
-            <div className="space-y-1">
-              <h3>Hoki Teguh Oktian</h3>
-              <p className="text-xs text-gray-700">Admin Kredit</p>
-              <p className="text-xs text-gray-500"> 0031 - Cabang Sumber</p>
-            </div>
-          </div>
-
-          {/* Logout Button */}
-          <button className="py-2 px-4 border border-emerald-500 bg-emerald-700 w-full rounded text-gray-200 hover:bg-emerald-600 hover:border-emerald-600 justify-end">
-            <FontAwesomeIcon icon={faSignOut}></FontAwesomeIcon> Salir
-          </button>
-        </div>
+        {/* Logout Button */}
+        <button className="py-2 px-4 border border-emerald-500 bg-emerald-700 w-full rounded text-gray-200 hover:bg-emerald-600 hover:border-emerald-600 justify-end">
+          <FontAwesomeIcon icon={faSignOut}></FontAwesomeIcon> Salir
+        </button>
       </div>
     </aside>
   );

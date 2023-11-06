@@ -1,7 +1,5 @@
 import {
   faBookOpen,
-  faLock,
-  faUserPlus,
   faUniversity,
   faList,
 } from "@fortawesome/free-solid-svg-icons";
@@ -9,7 +7,7 @@ import {
 const initMenu = [
   {
     label: "Zona de estudio",
-    path: "/",
+    path: "/dashboard",
     icon: faUniversity,
   },
   {
@@ -22,26 +20,13 @@ const initMenu = [
   },
   {
     label: "Examen por materia",
-    path: "/exams",
+    path: "/dashboard/exams",
     icon: faBookOpen,
   },
   
 ];
 
 const authMenu = [
-  {
-    label: 'Autenticación',
-  },
-  {
-    label: "Acceder",
-    path: "/auth/login",
-    icon: faLock,
-  },
-  {
-    label: "Registrate",
-    path: "/auth/register",
-    icon: faUserPlus,
-  },
 ];
 
 export {initMenu, authMenu};

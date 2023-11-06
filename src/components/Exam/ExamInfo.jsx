@@ -1,4 +1,4 @@
-const ExamInfo = ({ data, currentQuestionNumber, questionNumber }) => {
+const ExamInfo = ({ data, currentQuestionNumber, questionNumber,  }) => {
   return (
     <>
       <div className="flex justify-center items-center w-screen md:pt-8 p-4 text-slate-800">

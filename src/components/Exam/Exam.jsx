@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Panel from "./Panel";
 import SendModal from "./SendModal";
 import FormButton from "./FormButton";
+import TextReferenceModal from "./TextReferenceModal";
 
 const Exam = (props) => {
   const questionBlocks = props.questionBlocks;
@@ -156,83 +157,93 @@ const Exam = (props) => {
   // console.log("index map", indexMap);
 
   return (
-    <div className="grid-cols-1 grid place-content-center">
-      <div className="md:px-16 px-2 sm:px-8 lg:px-28">
-        {/* Panel */}
-        <Panel
-          questionNumber={questionNumber}
-          choicesVector={choicesVector}
-          setCurrentQuestionBlock={setCurrentQuestionBlock}
-          setCurrentQuestion={setCurrentQuestion}
-          currentQuestionNumber={currentQuestionNumber}
-          setCurrentQuestionNumber={setCurrentQuestionNumber}
-          setChoiceIndex={setChoiceIndex}
-          indexMap={indexMap}
-          otherClassNames={""}
-        ></Panel>
+    <>
+      <div className="grid-cols-1 grid place-content-center">
+        <div className="md:px-16 px-2 sm:px-8 lg:px-28">
+          <TextReferenceModal
+            questionBlocks={questionBlocks}
+            currentQuestionBlock={currentQuestionBlock}
+          ></TextReferenceModal>
+          {/* Panel */}
+          <Panel
+            questionNumber={questionNumber}
+            choicesVector={choicesVector}
+            setCurrentQuestionBlock={setCurrentQuestionBlock}
+            setCurrentQuestion={setCurrentQuestion}
+            currentQuestionNumber={currentQuestionNumber}
+            setCurrentQuestionNumber={setCurrentQuestionNumber}
+            setChoiceIndex={setChoiceIndex}
+            indexMap={indexMap}
+            otherClassNames={""}
+          ></Panel>
 
-        <div className="">
-          <div
-            href="#"
-            className="p-2 md:p-8 bg-white border border-gray-200 rounded-lg shadow "
-          >
-            <h5 className="mb-2 md:mb-6 text-2xl font-bold tracking-tight text-gray-900 ">
-              {questionNumber + "."}
-              <span className="md:ml-4 sm:ml-2 text-xl font-medium">
-                {" "}
-                {text}
-              </span>
-            </h5>
-            <ul className="font-normal text-gray-800 text-lg">
-              {choices.map((text, index) => (
-                <li
-                  onClick={() => onClickChoice(index)}
-                  key={index}
-                  className={`${
-                    index === choiceIndex
-                      ? "bg-emerald-400"
-                      : "hover:bg-emerald-200"
-                  } my-3 container md:p-2 rounded-md md:rounded-xl cursor-pointer`}
-                >
-                  <span className="font-semibold pr-2 pl-2 md:pl-0 text-lg md:text-xl">
-                    {toLetter(index) + ") "}
-                  </span>
-                  <span>{text}</span>
-                </li>
-              ))}
-            </ul>
+          <div className="">
+            <div
+              href="#"
+              className="p-2 md:p-8 bg-white border border-gray-200 rounded-lg shadow "
+            >
+              <h5 className="mb-2 md:mb-6 text-2xl font-bold tracking-tight text-gray-900 ">
+                {questionNumber + "."}
+                <span className="md:ml-4 sm:ml-2 text-xl font-medium">
+                  {" "}
+                  {text}
+                </span>
+              </h5>
+              <ul className="font-normal text-gray-800 text-lg">
+                {choices.map((text, index) => (
+                  <li
+                    onClick={() => onClickChoice(index)}
+                    key={index}
+                    className={`${
+                      index === choiceIndex
+                        ? "bg-emerald-400"
+                        : "hover:bg-emerald-200"
+                    } my-3 container md:p-2 rounded-md md:rounded-xl cursor-pointer`}
+                  >
+                    <span className="font-semibold pr-2 pl-2 md:pl-0 text-lg md:text-xl">
+                      {toLetter(index) + ") "}
+                    </span>
+                    <span>{text}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
-        </div>
-        <div className="sm:flex">
-          <FormButton
-            onClick={() => onClickPrev(currentQuestionBlock, currentQuestion)}
-            extraClassNames={`${isStart() ? "cursor-not-allowed bg-gray-500 hover:bg-gray-400" : ""}
+          <div className="sm:flex">
+            <FormButton
+              onClick={() => onClickPrev(currentQuestionBlock, currentQuestion)}
+              extraClassNames={`${
+                isStart()
+                  ? "cursor-not-allowed bg-gray-500 hover:bg-gray-400"
+                  : ""
+              }
                   sm:mr-12
             `}
-          >
-            Prev
-          </FormButton>
-          {!isFinished() ? (
-            <FormButton
-              onClick={onClickNext(currentQuestionBlock, currentQuestion)}
-              extraClassNames="sm:ml-12"
             >
-              Next
+              Prev
             </FormButton>
-          ) : (
-            <SendModal
-              questionNumber={questionNumber}
-              answeredQuestions={answeredQuestions}
-              questionBlocks={questionBlocks}
-              choicesVector={choicesVector}
-              indexMap={indexMap}
-              startdate={startdate}
-              navigate={navigate}
-            ></SendModal>
-          )}
+            {!isFinished() ? (
+              <FormButton
+                onClick={onClickNext(currentQuestionBlock, currentQuestion)}
+                extraClassNames="sm:ml-12"
+              >
+                Next
+              </FormButton>
+            ) : (
+              <SendModal
+                questionNumber={questionNumber}
+                answeredQuestions={answeredQuestions}
+                questionBlocks={questionBlocks}
+                choicesVector={choicesVector}
+                indexMap={indexMap}
+                startdate={startdate}
+                navigate={navigate}
+              ></SendModal>
+            )}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

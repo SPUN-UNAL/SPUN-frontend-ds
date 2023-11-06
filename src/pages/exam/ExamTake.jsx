@@ -1,9 +1,8 @@
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from "react";
 import Exam from "components/Exam/Exam";
 import { useParams } from "react-router-dom";
 import { getExam } from "api/exams";
 import ExamInfo from "components/Exam/ExamInfo";
-
 
 function ExamTake() {
   // Fetch exam
@@ -41,7 +40,6 @@ function ExamTake() {
     }
   }
 
-
   return (
     <>
       <main className="h-screen w-full bg-slate-100 ">
@@ -52,7 +50,7 @@ function ExamTake() {
         ></ExamInfo>
 
         {/* Main Content */}
-          {/* Fetch of questions */}
+        {/* Fetch of questions */}
         <Exam
           questionBlocks={questionBlocks}
           questionNumber={questionNumber}

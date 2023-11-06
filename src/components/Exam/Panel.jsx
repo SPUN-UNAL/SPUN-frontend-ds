@@ -7,7 +7,7 @@ const Panel = ({
   setChoiceIndex,
   indexMap,
   otherClassNames,
-  currentQuestionNumber
+  currentQuestionNumber,
 }) => {
   const onClickPanel = (index) => {
     // Go to question of the index
@@ -31,8 +31,10 @@ const Panel = ({
             <span
               key={index}
               onClick={() => onClickPanel(index)}
-              className={`${choicesVector[index] !== -1 ? "bg-green-400" : "bg-white"}
-               ${element === currentQuestionNumber? "" : "hover:bg-gray-200"}
+              className={`${
+                choicesVector[index] !== -1 ? "bg-green-400" : "bg-white"
+              }
+               ${element === currentQuestionNumber ? "" : "hover:bg-gray-200"}
                 cursor-pointer 
                 rounded-md
                 p-2

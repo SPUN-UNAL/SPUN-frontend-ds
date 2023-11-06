@@ -1,33 +1,38 @@
 // Functional component
 import { useState } from "react";
-import Modal from "react-modal";
 import { useNavigate } from "react-router-dom";
+import Panel from "./Panel";
+import SendModal from "./SendModal";
 
-const baseURL = "http://localhost:4000/api/";
+const Exam = (props) => {
+  const questionBlocks = props.questionBlocks;
 
-const Exam = ({ questionBlocks }) => {
+  const questionNumber = props.questionNumber;
+  const setQuestionNumber = props.setQuestionNumber;
 
+  const currentQuestionNumber = props.currentQuestionNumber;
+  const setCurrentQuestionNumber = props.setCurrentQuestionNumber;
+
+  const navigate = useNavigate();
   // get date as soon as entered page
-  const startDate = Date.now();
+  const startdate = Date.now();
   // name, setName
-  let questionNumber = 0;
+  let tempQuestionNumber = 0;
   let indexMap = {};
 
   for (let i = 0; i < questionBlocks?.length; i++) {
     for (let j = 0; j < questionBlocks[i].questions?.length; j++) {
-      indexMap[questionNumber] = [i, j];
-      questionNumber++;
+      indexMap[tempQuestionNumber] = [i, j];
+      tempQuestionNumber++;
     }
   }
 
-  const initialChoices = Array(questionNumber).fill(-1);
-  const panel = Array.from({ length: questionNumber }, (_, i) => i + 1);
+  setQuestionNumber(tempQuestionNumber);
 
-  const navigate = useNavigate();
+  const initialChoices = Array(tempQuestionNumber).fill(-1);
 
   const [currentQuestionBlock, setCurrentQuestionBlock] = useState(0);
   const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [currentQuestionNumber, setCurrentQuestionNumber] = useState(1);
 
   // Chosen answer
   const [choiceIndex, setChoiceIndex] = useState(null);
@@ -40,14 +45,24 @@ const Exam = ({ questionBlocks }) => {
   // Score
   const [score, setScore] = useState(0);
   const [answeredQuestions, setAnsweredQuestions] = useState(0);
+
+  if (!questionBlocks[currentQuestionBlock]) {
+    console.log(questionBlocks);
+    console.log("Cur question inside block", currentQuestion);
+    console.log("Cur question Block", currentQuestionBlock);
+    console.log("Question Number", questionNumber);
+    return (
+      <>
+        <p>No this</p>
+      </>
+    );
+  }
+
   const { text, choices, answer } =
     questionBlocks[currentQuestionBlock].questions[currentQuestion];
 
-  // Handles modal
-  const [isOpenModal, setIsOpenModal] = useState(false);
-
   const isFinished = () => {
-    return currentQuestionNumber === questionNumber;
+    return currentQuestionNumber === tempQuestionNumber;
   };
   const isStart = () => {
     return currentQuestionNumber === 1;
@@ -125,63 +140,32 @@ const Exam = ({ questionBlocks }) => {
     }
   };
 
-  const onClickPanel = (index) => {
-    // Go to question of the index
-    setCurrentQuestionBlock(indexMap[index][0]);
-    setCurrentQuestion(indexMap[index][1]);
-    setCurrentQuestionNumber(index + 1);
-    if (choicesVector[index] === -1) {
-      setChoiceIndex(null);
-    } else {
-      setChoiceIndex(choicesVector[index]);
-    }
-  };
-
-  const onClickOpenModal = () => {
-    setIsOpenModal(true);
-  };
-  const onClickCloseModal = () => {
-    setIsOpenModal(false);
-  };
-
-  const onClickSubmitExam = async () => {
-    // Sumbit date 
-    const endDate = Date.now();
-    // get answers with questions
-    let dump = [];
-    for (let i = 0 ;i < questionNumber; i++){
-      // question
-      dump[i] = [questionBlocks[indexMap[i][0]].questions[indexMap[i][1]]._id, choicesVector[i]]
-    }
-    // console.log(dump);
-
-    navigate("/dashboard");
-  };
-  
-  
-  Modal.setAppElement("#root");
-
+  // console.log("BLOQUES", questionBlocks[currentQuestionBlock]);
+  // console.log(
+  //   "Questions",
+  //   questionBlocks[currentQuestionBlock].questions[currentQuestion]
+  // );
+  // console.log(text, choices, answer);
+  // console.log(
+  //   "QUESTION BLOCK",
+  //   currentQuestionBlock,
+  //   "CURRENT QUESTION BLOCK",
+  //   currentQuestion
+  // );
+  // console.log("index map", indexMap);
 
   return (
     <div className="container">
       {/* Panel */}
-      <div className="">
-        Panel:
-        {panel.map((element, index) => (
-          <span
-            key={index}
-            onClick={() => onClickPanel(index)}
-            className={choicesVector[index] !== -1 ? "bg-green-600" : ""}
-          >
-            {" " + element}
-          </span>
-        ))}
-      </div>
-      <p>
-        <span>
-          Current question: {currentQuestionNumber} / {questionNumber}{" "}
-        </span>
-      </p>
+      <Panel
+        questionNumber={questionNumber}
+        choicesVector={choicesVector}
+        setCurrentQuestionBlock={setCurrentQuestionBlock}
+        setCurrentQuestion={setCurrentQuestion}
+        setCurrentQuestionNumber={setCurrentQuestionNumber}
+        setChoiceIndex={setChoiceIndex}
+        indexMap={indexMap}
+      ></Panel>
 
       <p>
         <span>Question:{text}</span>
@@ -202,7 +186,7 @@ const Exam = ({ questionBlocks }) => {
 
       <p>
         <span>
-          Choose answer: {choiceIndex + 1}: Correct: {choiceStatus}
+          Choose answer: {choiceIndex + 1}: Is Correct: {choiceStatus}
         </span>
       </p>
       <div className="">
@@ -211,90 +195,21 @@ const Exam = ({ questionBlocks }) => {
         >
           Prev
         </button>
-        <button
-          onClick={() =>
-            isFinished()
-              ? onClickOpenModal()
-              : onClickNext(currentQuestionBlock, currentQuestion)
-          }
-        >
-          {isFinished() ? "Finish" : "Next"}
-        </button>
-
-        <Modal
-          isOpen={isOpenModal}
-          onRequestClose={onClickCloseModal}
-          contentLabel="Finish Exam Modal"
-          className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0 bg-zinc-300 bg-opacity-30 backdrop-blur-[1.3px]"
-        >
-          <div className="relative transform overflow-hidden bg-transparent rounded-lg text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
-            <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
-              <div className="sm:flex sm:items-start">
-                <div className="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
-                  <svg
-                    className="h-6 w-6 text-red-600"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="1.5"
-                    stroke="currentColor"
-                    aria-hidden="true"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"
-                    />
-                  </svg>
-                </div>
-                <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
-                  <h3
-                    className="text-base font-semibold leading-6 text-gray-900"
-                    id="modal-title"
-                  >
-                    Finalizar Examen
-                  </h3>
-                  <div className="mt-2">
-                    <p className="text-sm text-gray-500">
-                      ¿Estás seguro de que quieres finalizar el examen?
-                      {questionNumber === answeredQuestions ? (
-                        ""
-                      ) : (
-                        <span>
-                          <br></br>
-                          {"Te falta " +
-                            (questionNumber - 1 !== answeredQuestions
-                              ? "n"
-                              : "") +
-                            String(questionNumber - answeredQuestions)
-                            +
-                            " pregunta por responder"}
-                        </span>
-                      )}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="bg-slate-100 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-              <button
-                type="button"
-                onClick={onClickSubmitExam}
-                className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
-              >
-                Enviar
-              </button>
-              <button
-                onClick={onClickCloseModal}
-                type="button"
-                className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
-              >
-                Volver
-              </button>
-            </div>
-          </div>
-        </Modal>
-
-        <p>Correct answers:</p>
+        {!isFinished() ? (
+          <button onClick={onClickNext(currentQuestionBlock, currentQuestion)}>
+            Next
+          </button>
+        ) : (
+          <SendModal
+            questionNumber={questionNumber}
+            answeredQuestions={answeredQuestions}
+            questionBlocks={questionBlocks}
+            choicesVector={choicesVector}
+            indexMap={indexMap}
+            startdate={startdate}
+            navigate={navigate}
+          ></SendModal>
+        )}
         <p>
           {choicesVector.map((element, index) => (
             <span key={index}> {element}</span>

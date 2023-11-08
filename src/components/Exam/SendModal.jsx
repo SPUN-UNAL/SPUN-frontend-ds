@@ -103,10 +103,10 @@ const SendModal = ({
                     ) : (
                       <span>
                         <br></br>
-                        {"Te falta " +
+                        {"Te falta" +
                           (questionNumber - 1 !== answeredQuestions
-                            ? "n"
-                            : "") +
+                            ? "n "
+                            : " ") +
                           String(questionNumber - answeredQuestions) +
                           " pregunta por responder"}
                       </span>

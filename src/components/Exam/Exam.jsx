@@ -132,7 +132,6 @@ const Exam = (props) => {
     }
   };
 
-  console.log("NUMBER", answeredQuestions);
 
   return (
     <>

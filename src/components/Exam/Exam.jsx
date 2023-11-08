@@ -60,12 +60,12 @@ const Exam = (props) => {
     return String.fromCharCode(65 + index);
   };
 
-  const onClickChoice = (index) => {
+  const onClickChoice = async (index) => {
     setChoiceIndex(index);
     const answerInIndex = parseInt(answer) - 1;
     let newChoices = choicesVector;
 
-    if (newChoices[currentQuestion] === -1) {
+    if (choicesVector[currentQuestionNumber - 1] === -1) {
       setAnsweredQuestions(answeredQuestions + 1);
     }
     newChoices[currentQuestionNumber - 1] = index;
@@ -131,6 +131,8 @@ const Exam = (props) => {
       setCurrentQuestionNumber(currentQuestionNumber - 1);
     }
   };
+
+  console.log("NUMBER", answeredQuestions);
 
   return (
     <>

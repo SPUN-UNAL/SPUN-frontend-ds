@@ -30,6 +30,5 @@ export const postExamTake = async (
   try {
     axios.post(`/exam/take/${exam_id}`, data);
   } catch (error) {
-    console.log(error);
   }
 };

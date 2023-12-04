@@ -40,7 +40,7 @@ function ProfilePage() {
               Registrado en: {dayjs(data?.createdAt).format("DD/MM/YYYY")}
             </span>
             <p className="text-xl  text-gray-700 py-3">
-              Aquí estan tus ultimos resultados
+              Aquí estan tus últimos resultados
             </p>
           </div>
 

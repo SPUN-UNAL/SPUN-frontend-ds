@@ -7,65 +7,36 @@ import { useOutletContext } from "react-router-dom";
 import { useAuth } from "../context/AuthContext.jsx";
 import { useEffect, useState } from "react";
 import { getExamTakes } from "api/exams.js";
+import { Link } from "react-router-dom";
 
 function Dashboard() {
   const { user } = useAuth();
 
   const avatar = "/images/male_avatar.svg";
 
-  // Card color available at /src/index.css
-  const dataOS = [
-    {
-      title: "Examen Matemáticas",
-      date: "12/Mayo/2023",
-      score: 200.01,
-      max: 300,
-      color: "cardMath",
-    },
-    {
-      title: "Examen Análisis textual",
-      date: "11/Mayo/2023",
-      score: 120.03,
-      max: 200,
-      color: "cardTextAnalysis",
-    },
-    {
-      title: "Examen Análisis de Imágen",
-      date: "10/Mayo/2023",
-      score: 20.01,
-      max: 300,
-      color: "cardImageAnalysis",
-    },
-    {
-      title: "Examen Ciencias Naturales",
-      date: "9/Mayo/2023",
-      score: 145.04,
-      max: 300,
-      color: "cardNaturalScience",
-    },
-    {
-      title: "Examen Ciencias Sociales",
-      date: "1/Mayo/2023",
-      score: 230.01,
-      max: 300,
-      color: "cardSocialScience",
-    },
-  ];
-
   const [data, setData] = useState(null);
-  const [lastScore, setLastScorers] = useState(null);
+  const [lastScore, setLastScore] = useState(null);
+  const [dateFirstExamtake, setDateFirstExamTake] = useState(null);
 
-  // useEffect(() => {
-  //   const setUserProfileData = async () => {
-  //     const dump = await getExamTakes(user?.id);
-  //     setData(dump.data.examTakes.slice(0,5));
-  //     for (let x in dump.data.examTakes){
+  useEffect(() => {
+    const setExamsData = async () => {
+      const dump = await getExamTakes(user?.id);
+      setData(dump.data.examTakes.slice(0, 5));
 
-  //     }
-  //   };
-  //   setUserProfileData();
-  // });
-  
+      let tempscore = 0;
+      for (let x in data) {
+        tempscore += data[x].score;
+      }
+      tempscore = tempscore / data?.length;
+
+      setLastScore(tempscore);
+
+      try {
+        setDateFirstExamTake(data[data?.length - 1].createdAt);
+      } catch {}
+    };
+    setExamsData();
+  });
 
   const [sidebarToggle] = useOutletContext();
 
@@ -79,11 +50,13 @@ function Dashboard() {
           user={{ name: user.username }}
         />
 
-
         <div className="px-2 mx-auto mainCard">
           <div className="w-full overflow-hidden text-slate-700 md:grid gap-4 grid md:grid-cols-6">
-            <StatisticWidget className="col-span-4 col-start-1 bg-white" />
-            <AchievementWidget />
+            <StatisticWidget
+              className="md:col-span-4 md:col-start-1 bg-white px-2"
+              exams={data}
+            />
+            <AchievementWidget lastScore={lastScore} date={dateFirstExamtake} />
           </div>
         </div>
 
@@ -92,11 +65,35 @@ function Dashboard() {
             Simulacros tomados
           </h1>
 
-          <div className="flex flex-row gap-x-4 overflow-hidden overflow-x-auto justify-between no-scrollbar">
-            {dataOS?.map((data, index) => (
-              <ScrolledCard key={index} data={data} />
-            ))}
-          </div>
+          {data ? (
+            <>
+              <div className="flex flex-wrap flex-row md:flex-nowrap gap-x-4 justify-between no-scrollbar">
+                {data?.map((data, index) => (
+                  <ScrolledCard key={index} data={data} />
+                ))}
+              </div>
+              <div className="py-6 block">
+                <Link to="/auth/profile/">
+                  <p className="font-semibold text-blue-800 hover:text-blue-500">
+                    Ve todos los examenes que has tomado!
+                  </p>
+                </Link>
+              </div>
+            </>
+          ) : (
+            <>
+              <p className="text-gray-600 text-lg">
+                No has tomado tu primer examen!
+                <div className="py-6">
+                  <Link to="/dashboard/exams">
+                    <p className="font-semibold text-blue-800 hover:text-blue-500">
+                      Ve todos los examenes con los que puedes practicar!
+                    </p>
+                  </Link>
+                </div>
+              </p>
+            </>
+          )}
 
           <div className="lg:w-full w-[1024px] overflow-hidden flex flex-row justify-between text-slate-700 gap-2 lg:max-h-screen overflow-x-auto whitespace-nowrap"></div>
         </div>

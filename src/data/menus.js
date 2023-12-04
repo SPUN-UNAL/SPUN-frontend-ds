@@ -15,7 +15,7 @@ const initMenu = [
   },
   {
     label: "Lista de Simulacros",
-    path: "/list-simulacrums",
+    path: "/dashboard/simulacrums",
     icon: faList,
   },
   {

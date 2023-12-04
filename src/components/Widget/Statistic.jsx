@@ -6,17 +6,21 @@ import "./widget.css";
 Chart.register();
 
 function Statistic({ ...props }) {
+  
+  const exams = props.exams;
+  let labels = [] 
+  let scoreData = [] 
+  for (let i in exams){
+    labels.push(exams[i].exam.title);
+    scoreData.push(Math.round(exams[i].score * 100));
+  }
+
   const data = {
-    labels: ["Simulacro 1", "Simulacro 2", "Simulacro 3", "Simulacro 4", "Simulacro 5", "Simulacro 6"],
+    labels: labels,
     datasets: [
       {
-        label: "2023",
-        data: ["12", "22", "90", "150", "145", "120", "190"],
-      },
-      {
-        label: "Objetivo",
-        data: ["11", "20", "89", "149", "150"],
-        type: "line",
+        label: "Puntaje Obtenido",
+        data: scoreData,
       },
     ],
   };

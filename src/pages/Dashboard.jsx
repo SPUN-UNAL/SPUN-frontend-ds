@@ -5,6 +5,8 @@ import DashboardHeader from "../components/Other/DashboardHeader.jsx";
 import ScrolledCard from "../components/Widget/ScrolledCard.jsx";
 import { useOutletContext } from "react-router-dom";
 import { useAuth } from "../context/AuthContext.jsx";
+import { useEffect, useState } from "react";
+import { getExamTakes } from "api/exams.js";
 
 function Dashboard() {
   const { user } = useAuth();
@@ -50,6 +52,21 @@ function Dashboard() {
     },
   ];
 
+  const [data, setData] = useState(null);
+  const [lastScore, setLastScorers] = useState(null);
+
+  // useEffect(() => {
+  //   const setUserProfileData = async () => {
+  //     const dump = await getExamTakes(user?.id);
+  //     setData(dump.data.examTakes.slice(0,5));
+  //     for (let x in dump.data.examTakes){
+
+  //     }
+  //   };
+  //   setUserProfileData();
+  // });
+  
+
   const [sidebarToggle] = useOutletContext();
 
   return (
@@ -61,6 +78,7 @@ function Dashboard() {
           avatar={avatar}
           user={{ name: user.username }}
         />
+
 
         <div className="px-2 mx-auto mainCard">
           <div className="w-full overflow-hidden text-slate-700 md:grid gap-4 grid md:grid-cols-6">

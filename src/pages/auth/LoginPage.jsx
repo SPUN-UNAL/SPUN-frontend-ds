@@ -20,7 +20,7 @@ function LoginPage() {
     if (isAuthenticated) {
       navigate("/dashboard");
     }
-  }, [isAuthenticated]);
+  });
 
   const onSubmit = handleSubmit(async (values) => {
     signin(values);

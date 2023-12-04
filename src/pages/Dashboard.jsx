@@ -65,7 +65,7 @@ function Dashboard() {
             Simulacros tomados
           </h1>
 
-          {data ? (
+          {data && data.length > 0  ? (
             <>
               <div className="flex flex-wrap flex-row md:flex-nowrap gap-x-4 justify-between no-scrollbar">
                 {data?.map((data, index) => (

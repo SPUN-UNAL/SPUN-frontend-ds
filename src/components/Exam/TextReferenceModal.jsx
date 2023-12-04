@@ -1,9 +1,5 @@
 import Modal from "react-modal";
 import { useState } from "react";
-import { useParams } from "react-router-dom";
-import { postExamTake } from "api/exams";
-import { useAuth } from "context/AuthContext";
-import FormButton from "./FormButton";
 
 const TextReferenceModal = ({ questionBlocks, currentQuestionBlock }) => {
   // Handles modal

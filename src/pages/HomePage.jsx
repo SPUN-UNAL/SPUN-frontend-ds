@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import HeroSection from "components/LandingPage/HeroSection";
 import FeaturesSection from "components/LandingPage/FeaturesSection";
 import CTA from "components/LandingPage/CTA"

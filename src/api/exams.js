@@ -8,6 +8,10 @@ export const getExams = async () => {
   return axios.get(`/exam/`);
 };
 
+export const getExamTakes = async(id) =>{
+  return axios.get(`/exam/user/${id}`);
+}
+
 export const postExamTake = async (
   exam_id,
   answers,
@@ -26,6 +30,5 @@ export const postExamTake = async (
   try {
     axios.post(`/exam/take/${exam_id}`, data);
   } catch (error) {
-    console.log(error);
   }
 };

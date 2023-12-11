@@ -11,6 +11,7 @@ function ExamList() {
   useEffect(() => {
     const setExams = async () => {
       const dump = await getExams();
+
       setData(dump.data.exams);
     };
     setExams();

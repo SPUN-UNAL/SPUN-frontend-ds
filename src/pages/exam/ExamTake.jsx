@@ -12,6 +12,10 @@ function ExamTake() {
   const [currentQuestionNumber, setCurrentQuestionNumber] = useState(1);
 
   useEffect(() => {
+    document.body.classList.add("bg-slate-100");
+  });
+
+  useEffect(() => {
     const setExam = async () => {
       const dump = await getExam(id);
       setData(dump.data.exam);

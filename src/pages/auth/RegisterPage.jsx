@@ -20,7 +20,7 @@ function RegisterPage() {
     if (isAuthenticated) {
       navigate("/dashboard");
     }
-  }, [isAuthenticated]);
+  });
 
   const onSubmit = handleSubmit(async (values) => {
     signup(values);
@@ -132,29 +132,6 @@ function RegisterPage() {
                       </span>
                     )}
                   </div>
-
-                  {/* Konfirmasi Password 
-                  <div className="flex flex-col mb-6">
-                    <div className="relative">
-                      <div className="inline-flex items-center justify-center absolute left-0 top-0 h-full w-10 text-gray-400">
-                        <FontAwesomeIcon icon={faLock} />
-                      </div>
-
-                      <input
-                        type="password"
-                        name="confirm_password"
-                        onChange={(e) => setConfirmPassword(e.target.value)}
-                        className="text-sm placeholder-gray-500 pl-10 pr-4 rounded-lg border border-gray-400 w-full md:py-2 py-3 focus:outline-none focus:border-emerald-400"
-                        placeholder="Confirma la contraseña"
-                      />
-                    </div>
-                    {error?.confirm_password && (
-                      <span className="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">
-                        {error.confirm_password[0]}
-                      </span>
-                    )}
-                  </div>
-                  */}
 
                   {/* Forgot Password Link */}
                   <div className="flex items-center mb-6 -mt-2 md:-mt-4">

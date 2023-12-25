@@ -1,3 +1,6 @@
+# Crear imagen: docker build -t <nombre_imagen> .
+# Correr imagen: docker run -p 3000:3000 <nombre_imagen>
+
 # Fetching the latest node image on apline linux
 FROM node:20-alpine AS builder
 
